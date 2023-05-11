@@ -11,6 +11,7 @@ class Criteria extends Model
     protected $table = 'criterias';
     protected $fillable = [
         'description',
+        'percentage',
         'category_id',
     ];
 }

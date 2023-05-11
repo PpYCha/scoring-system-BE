@@ -35,6 +35,7 @@ class CriteriaController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'description' => 'required',
+            'percentage' => 'required',
             'category_id' => 'required',
         ]);
 
@@ -47,6 +48,7 @@ class CriteriaController extends Controller
 
         $data = $request->only([
             'description',
+            'percentage',
             'category_id',
         ]);
 
@@ -61,9 +63,19 @@ class CriteriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Criteria $criteria)
+    public function show(string $id)
     {
-        //
+        $criteria = Criteria::find($id);
+
+        if (!$criteria) {
+            return response()->json([
+                'message' => 'criteria not found.',
+            ], 404);
+        }
+
+        return response()->json([
+            'criteria' => $criteria,
+        ], 200);
     }
 
     /**
@@ -85,9 +97,16 @@ class CriteriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Criteria $criteria)
+    public function destroy($id)
     {
+        $criteria = Criteria::find($id);
         $criteria->delete();
+
+        if (!$criteria) {
+            return response()->json([
+                'message' => 'criteria not found.',
+            ], 404);
+        }
 
         return response()->json([
             'message' => 'Criteria deleted successfully.',
