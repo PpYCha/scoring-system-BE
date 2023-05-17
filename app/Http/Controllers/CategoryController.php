@@ -35,7 +35,7 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
             'percentage' => 'required',
             'event_id' => 'required',
         ]);

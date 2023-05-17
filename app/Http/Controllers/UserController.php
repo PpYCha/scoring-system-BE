@@ -99,6 +99,7 @@ class UserController extends Controller
             'password' => 'required',
             'contactNumber' => 'nullable',
             'role' => 'required',
+            'event' => 'nullable',
             'status' => 'nullable',
         ]);
 
@@ -111,7 +112,7 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
-        $data = $request->only(['name', 'email', 'password', 'contactNumber', 'role', 'status']);
+        $data = $request->only(['name', 'email', 'password', 'contactNumber', 'role', 'event', 'status']);
 
         $data['password'] = Hash::make($data['password']);
 

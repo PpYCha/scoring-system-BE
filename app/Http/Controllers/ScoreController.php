@@ -37,7 +37,8 @@ class ScoreController extends Controller
             'score' => 'required',
             'contestant_id' => 'required',
             'judge_id' => 'required',
-            'criteria_id' => 'required',
+            'criteria_id' => 'nullable',
+            'category_id' => 'required',
             'event_id' => 'required',
         ]);
 
@@ -53,6 +54,7 @@ class ScoreController extends Controller
             'contestant_id',
             'judge_id',
             'criteria_id',
+            'category_id',
             'event_id',
         ]);
 

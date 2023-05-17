@@ -45,7 +45,7 @@ class CriteriaFactory extends Factory
             'appeal',
         ];
 
-        $category_id = $this->faker->numberBetween(1, 8);
+        $category_id = $this->faker->numberBetween(1, 3);
 
         return [
             'description' => $this->faker->randomElement($criteria),

@@ -35,7 +35,7 @@ class EventController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
             'date' => 'required',
         ]);
 

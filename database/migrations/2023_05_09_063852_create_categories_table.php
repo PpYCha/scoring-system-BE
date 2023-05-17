@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('category');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('percentage');
 
             $table->bigInteger('event_id')->unsigned();

@@ -15,5 +15,6 @@ class Score extends Model
         'judge_id',
         'criteria_id',
         'event_id',
+        'category_id',
     ];
 }
