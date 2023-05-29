@@ -48,6 +48,7 @@ class ContestantController extends Controller
             'dateOfBirth' => 'required',
             'birthPlace' => 'required',
             'event_id' => 'required',
+            'cotestant_number' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -72,6 +73,7 @@ class ContestantController extends Controller
             'dateOfBirth',
             'birthPlace',
             'event_id',
+            'cotestant_number',
         ]);
 
         $contestant = Contestant::create($data);

@@ -96,7 +96,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'required',
+            'password' => 'nullable',
             'contactNumber' => 'nullable',
             'role' => 'required',
             'event' => 'nullable',
@@ -114,7 +114,12 @@ class UserController extends Controller
 
         $data = $request->only(['name', 'email', 'password', 'contactNumber', 'role', 'event', 'status']);
 
-        $data['password'] = Hash::make($data['password']);
+        // Check if password is provided and not empty before updating
+        if ($request->has('password') && !empty($request->password)) {
+            $data['password'] = Hash::make($request->password);
+        } else {
+            unset($data['password']);
+        }
 
         if ($user->email === $data['email']) {
             unset($data['email']);
