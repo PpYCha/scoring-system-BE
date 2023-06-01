@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\SubEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class SubEventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::all();
+        $subEvents = SubEvent::all();
         return response()->json([
             'status' => 200,
-            'categories' => $categories,
+            'subEvents' => $subEvents,
         ]);
     }
 
@@ -34,58 +34,44 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'category' => 'required',
-            'description' => 'nullable',
-            'percentage' => 'required',
+            'title' => 'required',
+            'date' => 'required',
             'event_id' => 'required',
-            'subEvent_id' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Unable to create event.',
+                'message' => 'Unable to create sub event.',
                 'errors' => $validator->errors(),
             ], 422);
         }
 
         $data = $request->only([
-            'category',
-            'description',
-            'percentage',
+            'title',
+            'date',
             'event_id',
-            'subEvent_id',
         ]);
 
-        $category = Category::create($data);
+        $subEvent = SubEvent::create($data);
 
         return response()->json([
-            'message' => 'Category created successfully.',
-            'category' => $category,
+            'message' => 'SubEvent created successfully.',
+            'subEvent' => $subEvent,
         ], 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(SubEvent $subEvent)
     {
-        $category = Category::find($id);
-
-        if (!$category) {
-            return response()->json([
-                'message' => 'Category not found.',
-            ], 404);
-        }
-
-        return response()->json([
-            'category' => $category,
-        ], 200);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(SubEvent $subEvent)
     {
         //
     }
@@ -93,7 +79,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, SubEvent $subEvent)
     {
         //
     }
@@ -101,12 +87,12 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(SubEvent $subEvent)
     {
-        $category->delete();
+        $subEvent->delete();
 
         return response()->json([
-            'message' => 'category deleted successfully.',
+            'message' => 'SubEvent deleted successfully.',
         ], 200);
     }
 }

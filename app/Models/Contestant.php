@@ -25,6 +25,7 @@ class Contestant extends Model
         'birthPlace',
         'event_id',
         'cotestant_number',
+        'subEvent_id',
 
     ];
 }

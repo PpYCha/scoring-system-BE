@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class SubEvent extends Model
 {
     use HasFactory;
-    protected $table = 'categories';
+    protected $table = 'subevents';
     protected $fillable = [
-        'category',
-        'description',
-        'percentage',
+        'title',
+        'date',
         'event_id',
-        'subEvent_id',
     ];
 }

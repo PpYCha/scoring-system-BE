@@ -40,6 +40,7 @@ class ScoreController extends Controller
             'criteria_id' => 'nullable',
             'category_id' => 'required',
             'event_id' => 'required',
+            'subEvent_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -56,6 +57,7 @@ class ScoreController extends Controller
             'criteria_id',
             'category_id',
             'event_id',
+            'subEvent_id',
         ]);
 
         $score = Score::create($data);

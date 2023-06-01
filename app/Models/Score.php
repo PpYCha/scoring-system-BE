@@ -16,5 +16,6 @@ class Score extends Model
         'criteria_id',
         'event_id',
         'category_id',
+        'subEvent_id',
     ];
 }

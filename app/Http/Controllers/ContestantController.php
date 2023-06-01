@@ -48,6 +48,7 @@ class ContestantController extends Controller
             'dateOfBirth' => 'required',
             'birthPlace' => 'required',
             'event_id' => 'required',
+            'subEvent_id' => 'required',
             'cotestant_number' => 'nullable',
         ]);
 
@@ -74,6 +75,7 @@ class ContestantController extends Controller
             'birthPlace',
             'event_id',
             'cotestant_number',
+            'subEvent_id',
         ]);
 
         $contestant = Contestant::create($data);

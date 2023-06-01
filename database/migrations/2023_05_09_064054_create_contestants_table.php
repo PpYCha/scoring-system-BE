@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('birthPlace');
             $table->string('cotestant_number')->nullable();
             $table->bigInteger('event_id')->unsigned();
+            $table->bigInteger('subEvent_id')->unsigned();
             $table->timestamps();
         });
     }
