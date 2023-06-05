@@ -26,6 +26,6 @@ class Contestant extends Model
         'event_id',
         'cotestant_number',
         'subEvent_id',
-
+        'image',
     ];
 }

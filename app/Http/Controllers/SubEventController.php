@@ -79,20 +79,52 @@ class SubEventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SubEvent $subEvent)
+    public function update(Request $request, string $id)
     {
-        //
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'date' => 'required',
+            'event_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Unable to update SubEvent.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $subEvent = SubEvent::findOrFail($id);
+
+        $data = $request->only(['title', 'date', 'event_id']);
+
+        $subEvent = SubEvent::updateOrCreate(['id' => $id], $data);
+
+        return response()->json([
+            'message' => 'Event updated successfully.',
+            'subEvent' => $subEvent,
+        ], 200);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubEvent $subEvent)
+    public function destroy($id)
     {
+        $subEvent = SubEvent::find($id);
         $subEvent->delete();
 
+        if (!$subEvent) {
+            return response()->json([
+                'message' => 'subEvent not found.',
+            ], 404);
+        }
+
         return response()->json([
-            'message' => 'SubEvent deleted successfully.',
+            'message' => 'Criteria deleted successfully.',
         ], 200);
+
     }
 }

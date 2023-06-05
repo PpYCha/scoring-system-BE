@@ -89,9 +89,37 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, string $id)
     {
-        //
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'description' => 'nullable',
+            'date' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Unable to update event.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $event = Event::findOrFail($id);
+
+        $data = $request->only(['title', 'description', 'date']);
+
+        if ($event->title === $data['title']) {
+            unset($data['title']);
+        }
+
+        $event = Event::updateOrCreate(['id' => $id], $data);
+
+        return response()->json([
+            'message' => 'Event updated successfully.',
+            'event' => $event,
+        ], 200);
+
     }
 
     /**

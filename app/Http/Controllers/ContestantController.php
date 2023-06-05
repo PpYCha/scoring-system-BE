@@ -37,27 +37,21 @@ class ContestantController extends Controller
             'name' => 'required',
             'municipality' => 'required',
             'age' => 'required',
-            'weight' => 'required',
-            'height' => 'required',
-            'shoeSize' => 'required',
-            'swimsuitSize' => 'required',
             'bust' => 'required',
             'waist' => 'required',
             'hips' => 'required',
             'nickname' => 'required',
-            'dateOfBirth' => 'required',
-            'birthPlace' => 'required',
+            'weight' => 'nullable',
+            'height' => 'nullable',
+            'shoeSize' => 'nullable',
+            'swimsuitSize' => 'nullable',
+            'dateOfBirth' => 'nullable',
+            'birthPlace' => 'nullable',
             'event_id' => 'required',
             'subEvent_id' => 'required',
             'cotestant_number' => 'nullable',
-        ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Unable to create contestant.',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
+        ]);
 
         $data = $request->only([
             'name',
@@ -77,6 +71,26 @@ class ContestantController extends Controller
             'cotestant_number',
             'subEvent_id',
         ]);
+
+        if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            if ($request->hasFile('image')) {
+                $destination_path = 'public/images/contestant';
+                $image = $request->file('image');
+                $image_name = $_FILES['image']['name'];
+                $data['image'] = $image_name;
+                $path = $request->file('image')->storeAs($destination_path, $image_name);
+
+            }
+        } else {
+            echo "File upload failed!";
+        }
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Unable to create contestant.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
         $contestant = Contestant::create($data);
 
