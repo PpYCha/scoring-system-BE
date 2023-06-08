@@ -48,7 +48,7 @@ class ContestantController extends Controller
             'dateOfBirth' => 'nullable',
             'birthPlace' => 'nullable',
             'event_id' => 'required',
-            'subEvent_id' => 'required',
+            'subEvent_id' => 'nullable',
             'cotestant_number' => 'nullable',
 
         ]);

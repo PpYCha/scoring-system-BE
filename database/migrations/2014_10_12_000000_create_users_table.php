@@ -18,9 +18,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role');
-            $table->string('event')->nullable();
             $table->string('contactNumber')->nullable();
             $table->string('status');
+
+            $table->bigInteger('event_id')->unsigned()->nullable();
+            $table->bigInteger('subEvent_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -17,20 +17,23 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $roles = ['Admin', 'Tabulator', 'Judge'];
+        $statuses = ['Active'];
+        $events = [null, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2];
 
-        $roles = ['Admin', 'Judge', 'Tabulator'];
-        $statuses = ['Active', 'InActive'];
-        $event = $this->faker->numberBetween(1, 5);
+        $role = $this->faker->randomElement($roles);
+        $event = $role === 'Judge' ? $this->faker->randomElement([1, 2]) : null;
 
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => 'admin', // password
+            'password' => bcrypt('1234'), // password
             'remember_token' => Str::random(10),
-            'role' => $this->faker->randomElement($roles),
+            'role' => $role,
             'status' => $this->faker->randomElement($statuses),
-            'event' => $event,
+            'event_id' => $event,
+            'subEvent_id' => $event,
         ];
     }
 

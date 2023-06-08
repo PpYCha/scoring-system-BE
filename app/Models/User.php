@@ -25,6 +25,8 @@ class User extends Authenticatable
         'role',
         'event',
         'status',
+        'event_id',
+        'subEvent_id',
     ];
 
     /**

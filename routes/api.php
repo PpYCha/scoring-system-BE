@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContestantController;
+use App\Http\Controllers\ContestantEventController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LoginController;
@@ -32,4 +33,5 @@ Route::resource('criterias', CriteriaController::class);
 Route::resource('contestants', ContestantController::class);
 Route::resource('scores', ScoreController::class);
 Route::resource('subevents', SubEventController::class);
+Route::resource('contestantsevents', ContestantEventController::class);
 Route::post("user-signin", [LoginController::class, 'userLogin']);
