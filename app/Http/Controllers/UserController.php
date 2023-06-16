@@ -40,8 +40,10 @@ class UserController extends Controller
             'password' => 'required',
             'contactNumber' => 'nullable',
             'role' => 'required',
-            'event' => 'nullable',
             'status' => 'required',
+            'event_id	' => 'nullable',
+            'subEvent_id' => 'nullable',
+
         ]);
 
         if ($validator->fails()) {
@@ -51,7 +53,7 @@ class UserController extends Controller
             ], 422);
         }
 
-        $data = $request->only(['name', 'email', 'password', 'contactNumber', 'event', 'role', 'status']);
+        $data = $request->only(['name', 'email', 'password', 'contactNumber', 'event_id	', 'subEvent_id', 'role', 'status']);
         $data['password'] = Hash::make($data['password']);
 
         $user = User::create($data);
@@ -99,8 +101,9 @@ class UserController extends Controller
             'password' => 'nullable',
             'contactNumber' => 'nullable',
             'role' => 'required',
-            'event' => 'nullable',
             'status' => 'nullable',
+            'event_id' => 'nullable',
+            'subEvent_id' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -112,7 +115,7 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
-        $data = $request->only(['name', 'email', 'password', 'contactNumber', 'role', 'event', 'status']);
+        $data = $request->only(['name', 'email', 'password', 'contactNumber', 'role', 'event_id', 'status']);
 
         // Check if password is provided and not empty before updating
         if ($request->has('password') && !empty($request->password)) {

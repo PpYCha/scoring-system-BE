@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('bust');
             $table->string('waist');
             $table->string('hips');
-            $table->string('nickname');
+            $table->string('nickname')->nullable();
             $table->string('image')->nullable();
             $table->date('dateOfBirth')->nullable();
             $table->string('birthPlace')->nullable();

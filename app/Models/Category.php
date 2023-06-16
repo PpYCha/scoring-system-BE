@@ -15,5 +15,8 @@ class Category extends Model
         'percentage',
         'event_id',
         'subEvent_id',
+        'minimumPercentage',
+        'maximumPercentage',
+        'status',
     ];
 }

@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
+            $table->string('criteriaName');
             $table->string('description');
             $table->string('percentage');
+            $table->string('minimumPercentage')->nullable();
             $table->bigInteger('category_id')->unsigned();
             $table->timestamps();
         });

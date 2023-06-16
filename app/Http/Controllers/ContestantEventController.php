@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContestantEvent;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class ContestantEventController extends Controller
@@ -38,9 +39,21 @@ class ContestantEventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ContestantEvent $contestantEvent)
+    public function show(string $id)
     {
-        //
+        $event = Event::find($id);
+
+        // $event = Event::find($id);
+
+        if (!$event) {
+            return response()->json([
+                'message' => 'Event not found.',
+            ], 404);
+        }
+
+        return response()->json([
+            'event' => $event,
+        ], 200);
     }
 
     /**

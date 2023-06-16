@@ -40,7 +40,7 @@ class ContestantController extends Controller
             'bust' => 'required',
             'waist' => 'required',
             'hips' => 'required',
-            'nickname' => 'required',
+            'nickname' => 'nullable',
             'weight' => 'nullable',
             'height' => 'nullable',
             'shoeSize' => 'nullable',

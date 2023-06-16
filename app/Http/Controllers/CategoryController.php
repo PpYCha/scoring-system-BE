@@ -39,6 +39,9 @@ class CategoryController extends Controller
             'percentage' => 'required',
             'event_id' => 'required',
             'subEvent_id' => 'required',
+            'minimumPercentage' => 'nullable',
+            'maximumPercentage' => 'nullable',
+            'status' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -54,6 +57,9 @@ class CategoryController extends Controller
             'percentage',
             'event_id',
             'subEvent_id',
+            'minimumPercentage',
+            'maximumPercentage',
+            'status',
         ]);
 
         $category = Category::create($data);

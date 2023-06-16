@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('category');
             $table->string('description')->nullable();
+            $table->string('minimumPercentage')->nullable();
+            $table->string('maximumPercentage')->nullable();
+            $table->string('status')->nullable();
             $table->string('percentage');
 
             $table->bigInteger('event_id')->unsigned();

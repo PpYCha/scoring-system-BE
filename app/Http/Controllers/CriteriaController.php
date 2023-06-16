@@ -34,9 +34,11 @@ class CriteriaController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'criteriaName' => 'required',
             'description' => 'required',
             'percentage' => 'required',
             'category_id' => 'required',
+            'minimumPercentage' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -50,6 +52,8 @@ class CriteriaController extends Controller
             'description',
             'percentage',
             'category_id',
+            'minimumPercentage',
+            'criteriaName',
         ]);
 
         $criteria = Criteria::create($data);
